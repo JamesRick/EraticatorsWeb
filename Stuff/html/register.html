@@ -21,16 +21,16 @@
                     <p class="form-title">
                         Sign Up</p>
                     <form class="login">
-                        <input type="text" placeholder="Name" />
-                        <input type="text" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
+                        <input id="name" type="text" placeholder="Name" />
+                        <input id="email" type="text" placeholder="Email" />
+                        <input id="password" type="password" placeholder="Password" />
                         <div class="checkbox">
                             <label>
-                                <input type="radio" name="usertype" style="vertical-align: middle"/> Admin
+                                <input id="adminbutton" type="radio" name="usertype" style="vertical-align: middle"/> Admin
                                 <input id="userbutton" type="radio" name="usertype" style="vertical-align: middle"/> User
                             </label>
                         </div>
-                        <input type="submit" value="Register" class="btn btn-success btn-sm" />
+                        <input id="register" onclick="Register();" type="button" value="Register" class="btn btn-success btn-sm" />
                     </form>
                 </div>
             </div>
@@ -41,6 +41,14 @@
 
 
 
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="../js/FireBase.js"></script>
+    <script src="../js/register.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-messaging.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
