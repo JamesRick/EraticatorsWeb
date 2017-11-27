@@ -9,13 +9,21 @@ var config = {
 };
 var app = firebase.initializeApp(config);
 
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
-function myfunc() {
-    alert("I am an alert box!");
+
+function handleChange(checkBox) {
+    if (checkBox.checked == true) {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+    } else {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+    }
 }
+// auth = firebase.auth().setPersistence(firebase.auth().Auth.Persistence.SESSION).catch(function (error) {
+//     console.log(error.message);
+// });
 
 function Login() {
-
     var txtEmail = document.getElementById("user").value;
     var txtPassword = document.getElementById("password").value;
     // var btnLogin = document.getElementById("btnLogin");
@@ -31,15 +39,10 @@ function Login() {
         console.log(error);
 
     });
-    var user = firebase.auth().currentUser;
-    if (user) {
-        alert("Welcome! " + user.email);
-    }
 }
-    // firebase.auth().onAuthStateChanged(function(user) {
-    //    if (user) {
-    //        alert("Success");
-    //    } else {
-    //        alert("failed");
-    //    }
-    // });
+
+    firebase.auth().onAuthStateChanged(function(user) {
+       if (user) {
+           window.location = "main.html";
+       }
+    });

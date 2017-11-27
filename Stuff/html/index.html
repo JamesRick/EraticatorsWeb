@@ -26,14 +26,14 @@
                     <div class="col-md-6 forgot-pass-content">
                         <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
                     </div>
-                    <input type="button" onclick="Login()"; id="btnLogin" value="Sign In" class="btn btn-success btn-sm" />
+                    <input type="button" onclick="Login();" id="btnLogin" value="Sign In" class="btn btn-success btn-sm" />
                     <a id="c" href="r.html" class="btn btn-primary btn-sm" role="button">Register</a>
                     <div class="remember-forgot">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" style="vertical-align: middle" /> Remember Me
+                                        <input id="check" onchange="handleChange(this);" type="checkbox" style="vertical-align: middle" /> Remember Me
                                     </label>
                                 </div>
                             </div>
