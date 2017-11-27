@@ -7,18 +7,27 @@ var config = {
     storageBucket: "eraticators-73723.appspot.com",
     messagingSenderId: "782651564720"
 };
-firebase.initializeApp(config);
+var app = firebase.initializeApp(config);
 
-firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-});
+const txtEmail = document.getElementById("user");
+const txtPassword = document.getElementById("password");
+const btnLogin = document.getElementById("btnLogin");
 
-firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-});
+function loginUser() {
+    const email = txtEmail.value;
+    const pass = txtPassword.value;
+    const auth = firebase.auth();
+    const promise = auth.signInWithEmailAndPassword(email, pass);
+    promise.catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
+        } else {
+            alert(errorMessage);
+        }
+        console.log(error);
+
+    });
+
+}
