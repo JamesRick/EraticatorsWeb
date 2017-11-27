@@ -87,6 +87,20 @@ form.login input[type="submit"]:hover
     transition: background-color 0.5s ease;
 }
 
+#c {
+    width: 100%;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 10px;
+    outline: 0;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+#c:hover {
+    color:white;
+}
 
 form.login .remember-forgot
 {
