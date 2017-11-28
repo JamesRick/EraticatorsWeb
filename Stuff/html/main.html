@@ -12,35 +12,39 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script src="../js/FireBase.js"></script>
 </head>
-<body>
-<div class="container">
-    <div class="row col-md-6 col-md-offset-2">
+<body id="woo">
+<div id="dvTable" class="container">
+    <div id="tbls" class="row col-md-6 col-md-offset-2">
         <script>
             const data = firebase.database();
             const ratRef = data.ref("RAT_TABLE");
 
             var table = '';
-            var row = 2;
-            var col = 10;
 
-            table += '<thead>' +  '<tr id="tablelook">' + '<th class="text-center">Key</th>' +
-                '<th>Created Date</th>' + '<th class="text-center">Key</th>' +
+            table += '<table class="table table-striped cu">' + '<thead>' +  '<tr id="tablelook">' +
+                '<th>Key</th>' +
+                '<th>Created Date</th>' + '<th>Key</th>' +
                 '<th>Location Type</th>' + '<th>Incident Zip</th>' +
                 '<th>Incident Address</th>' + '<th>City</th>' +
-                '<th>Borough</th>' + '<th>Latitude</th>' + '<th>Longitude</th>';
+                '<th>Borough</th>' + '<th>Latitude</th>' + '<th>Longitude</th>' +
+                '</tr>' + '</thead>';
 
-            ratRef.limitToLast(1).once('value', function(snapshot) {
+            ratRef.limitToLast(20).once('value', function (snapshot) {
                 if (snapshot.exists()) {
                     snapshot.forEach(function (child) {
-                        table += '<tr>';
+                        table += '<tr id="tablelook">';
                         child.forEach(function (data) {
-                           table += '<td></td>';
+                            table += '<td>' + data.val() + '</td>';
                         });
                         table += '</tr>';
                     });
                 }
             });
-            document.write('<table class="table table-striped cu">' + table + '</table>');
+            table += '</table>';
+            window.setTimeout(writer, 5000);
+            function writer() {
+                document.getElementById("tbls").innerHTML = table;
+            }
 
 
         </script>
@@ -48,20 +52,20 @@
 </div>
 
 
-    <script src="../js/main.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-messaging.js"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/bootstrap.bundle.js"></script>
-    <script src="../js/bootstrap.js"></script>
-    <script src="../js/login.js"></script>
+<script src="../js/main.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-messaging.js"></script>
+<script src="../js/index.js"></script>
+<script src="../js/bootstrap.bundle.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/login.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="/Stuff/js/login.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="/Stuff/js/login.js"></script>
 </body>
 </html>
