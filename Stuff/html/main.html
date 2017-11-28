@@ -8,67 +8,47 @@
     <link rel="stylesheet" href="../css/bootstrap-reboot.css"/>
     <link rel="stylesheet" href="../css/login_css.css"/>
     <link rel="stylesheet" href="../css/main.css"/>
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="../js/FireBase.js"></script>
 </head>
 <body>
 <div class="container">
     <div class="row col-md-6 col-md-offset-2">
-        <table class="table table-striped cu">
-            <thead>
-            <a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add New Rat</a>
-            <tr id="tablelook">
-                <th class="text-center">Key</th>
-                <th>Created Date</th>
-                <th>Location Type</th>
-                <th>Incident Zip</th>
-                <th>Incident Address</th>
-                <th>City</th>
-                <th>Borough</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-            </tr>
-            </thead>
-            <tr>
-                <td>1</td>
-                <td>Test</td>
-                <td>Test</td>
-                <td class="text-center">Test</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Test</td>
-                <td>Test</td>
-                <td class="text-center">Test</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Test</td>
-                <td>Test</td>
-                <td class="text-center">Test</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
+        <script>
+            const data = firebase.database();
+            const ratRef = data.ref("RAT_TABLE");
+
+            var table = '';
+            var row = 2;
+            var col = 10;
+
+            table += '<thead>' +  '<tr id="tablelook">' + '<th class="text-center">Key</th>' +
+                '<th>Created Date</th>' + '<th class="text-center">Key</th>' +
+                '<th>Location Type</th>' + '<th>Incident Zip</th>' +
+                '<th>Incident Address</th>' + '<th>City</th>' +
+                '<th>Borough</th>' + '<th>Latitude</th>' + '<th>Longitude</th>';
+
+            ratRef.limitToLast(1).once('value', function(snapshot) {
+                if (snapshot.exists()) {
+                    snapshot.forEach(function (child) {
+                        table += '<tr>';
+                        child.forEach(function (data) {
+                           table += '<td></td>';
+                        });
+                        table += '</tr>';
+                    });
+                }
+            });
+            document.write('<table class="table table-striped cu">' + table + '</table>');
+
+
+        </script>
     </div>
+</div>
 
 
-
-
-    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-    <script src="../js/FireBase.js"></script>
-    <script src="../js/index.js"></script>
+    <script src="../js/main.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
