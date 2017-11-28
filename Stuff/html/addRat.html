@@ -10,32 +10,31 @@
 
 
     <link rel="stylesheet" href="../css/login_css.css"/>
-</head>
-<body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script src="../js/FireBase.js"></script>
-    <script src="../js/index.js"></script>
+</head>
+<body>
+    <form class="addRatForm">
+        <input id="key" type="number" placeholder="Key" />
+        <input id="date" type="date" placeholder="CreatedDate" />
+        <input id="locationType" type="text" placeholder="Location Type" />
+        <input id="zip" type="number" placeholder="Incident Zip" />
+        <input id="address" type="text" placeholder="Incident Address" />
+        <input id="city" type="text" placeholder="City" />
+        <input id="borough" type="text" placeholder="Borough" />
+        <input id="latitude" type="number" placeholder="Latitude" />
+        <input id="longitude" type="number" placeholder="Longitude" />
+        <input id="addRatButton" onclick="AddNewRat();" type="button" value="AddRat" class="btn btn-success btn-sm" />
+    </form>
+
+
+
+    <script src="../js/addRat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-messaging.js"></script>
-    <script src="../js/index.js"></script>
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/login.js"></script>
@@ -44,5 +43,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="/Stuff/js/login.js"></script>
+
 </body>
 </html>

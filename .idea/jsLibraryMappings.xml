@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{bootstrap, firebase, firebase-DefinitelyTyped, firebase-app, firebase-auth, firebase-client-DefinitelyTyped, firebase-database, firebase-debug, firebase-firestore, firebase-messaging, jquery-3.1.1.slim, tether}" />
+    <file url="PROJECT" libraries="{bootstrap, firebase, firebase-app, firebase-auth, firebase-database, firebase-firestore, firebase-messaging, jquery-3.1.1.slim, tether}" />
   </component>
 </project>
