@@ -37,5 +37,15 @@
     <orderEntry type="library" name="jquery-3.1.1.slim" level="application" />
     <orderEntry type="library" name="tether" level="application" />
     <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="firebase" level="application" />
+    <orderEntry type="library" name="firebase-app" level="application" />
+    <orderEntry type="library" name="firebase-auth" level="application" />
+    <orderEntry type="library" name="firebase-database" level="application" />
+    <orderEntry type="library" name="firebase-firestore" level="application" />
+    <orderEntry type="library" name="firebase-messaging" level="application" />
+    <orderEntry type="library" name="jquery-3.1.1.slim" level="application" />
+    <orderEntry type="library" name="tether" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="d3.v4" level="application" />
   </component>
 </module>
