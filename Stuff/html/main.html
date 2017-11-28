@@ -32,11 +32,17 @@
 
                 ratRef.limitToLast(40).once('value', function (snapshot) {
                     if (snapshot.exists()) {
-                        snapshot.forEach(function (child) {
+                        snapshot.forEach(function (children) {
                             table += '<tr>';
-                            child.forEach(function (data) {
-                                table += '<td>' + data.val() + '</td>';
-                            });
+                            table += '<td>' + children.child("name").val() + '</td>';
+                            table += '<td>' + children.child("date").val() + '</td>';
+                            table += '<td>' + children.child("type").val() + '</td>';
+                            table += '<td>' + children.child("zip").val() + '</td>';
+                            table += '<td>' + children.child("address").val() + '</td>';
+                            table += '<td>' + children.child("city").val() + '</td>';
+                            table += '<td>' + children.child("borough").val() + '</td>';
+                            table += '<td>' + children.child("latitude").val() + '</td>';
+                            table += '<td>' + children.child("longitude").val() + '</td>';
                             table += '</tr>';
                         });
                     }
