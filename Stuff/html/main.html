@@ -15,39 +15,40 @@
 <body id="woo">
 <div id="dvTable" class="container">
     <div id="tbls" class="row col-md-6 col-md-offset-2">
-        <script>
-            const data = firebase.database();
-            const ratRef = data.ref("RAT_TABLE");
+        <table id="myTbl" class="table table-striped cu">
+            <script>
+                const data = firebase.database();
+                const ratRef = data.ref("RAT_TABLE");
 
-            var table = '';
+                var table = '';
 
-            table += '<table class="table table-striped cu">' + '<thead>' +  '<tr id="tablelook">' +
-                '<th>Key</th>' +
-                '<th>Created Date</th>' + '<th>Key</th>' +
-                '<th>Location Type</th>' + '<th>Incident Zip</th>' +
-                '<th>Incident Address</th>' + '<th>City</th>' +
-                '<th>Borough</th>' + '<th>Latitude</th>' + '<th>Longitude</th>' +
-                '</tr>' + '</thead>';
+                table += '<thead>' +  '<tr class="tablelook">' +
+                    '<th>Key</th>' +
+                    '<th>Created Date</th>' +
+                    '<th>Location Type</th>' + '<th>Incident Zip</th>' +
+                    '<th>Incident Address</th>' + '<th>City</th>' +
+                    '<th>Borough</th>' + '<th>Latitude</th>' + '<th>Longitude</th>' +
+                    '</tr>' + '</thead>';
 
-            ratRef.limitToLast(20).once('value', function (snapshot) {
-                if (snapshot.exists()) {
-                    snapshot.forEach(function (child) {
-                        table += '<tr id="tablelook">';
-                        child.forEach(function (data) {
-                            table += '<td>' + data.val() + '</td>';
+                ratRef.limitToLast(40).once('value', function (snapshot) {
+                    if (snapshot.exists()) {
+                        snapshot.forEach(function (child) {
+                            table += '<tr>';
+                            child.forEach(function (data) {
+                                table += '<td>' + data.val() + '</td>';
+                            });
+                            table += '</tr>';
                         });
-                        table += '</tr>';
-                    });
+                    }
+                });
+
+                window.setTimeout(writer, 5000);
+                function writer() {
+                    //alert(table);
+                    document.getElementById("myTbl").innerHTML = table;
                 }
-            });
-            table += '</table>';
-            window.setTimeout(writer, 5000);
-            function writer() {
-                document.getElementById("tbls").innerHTML = table;
-            }
-
-
-        </script>
+            </script>
+        </table>
     </div>
 </div>
 
