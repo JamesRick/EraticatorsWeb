@@ -7,6 +7,10 @@
     transition: 0.5s;
 }
 
+table {
+    background-color: rgba(144,144,144,.5);
+}
+
 
 
 .tablelook{
