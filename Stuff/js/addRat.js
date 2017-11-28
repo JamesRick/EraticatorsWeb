@@ -43,8 +43,7 @@ function AddNewRat() {
             type: locationType,
             zip: zip
         });
+        alert("New rat (" + key + ") added!");
+        window.location = "main.html";
     }
-    alert("New rat (" + key + ") added!");
-    window.location = "main.html";
-
 }
