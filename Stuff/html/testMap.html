@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="../css/bootstrap-grid.css"/>
     <link rel="stylesheet" href="../css/bootstrap-reboot.css"/>
     <link rel="stylesheet" href="../css/login_css.css"/>
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="../js/FireBase.js"></script>
 </head>
 <body>
 <div id="map"></div>
@@ -46,79 +49,59 @@
                 icon: iconBase + 'info-i_maps.png'
             }
         };
-
-        var features = [
-            {
-                position: new google.maps.LatLng(40.666108877279804, -73.87138712734941),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.6392892287361, -73.9541316335409),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.78857994984923, -73.94864079628115),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.689040272967645, -73.91429592408346),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.79482455512832, -73.97429632090504),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.78722279822423, -73.967925528552),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.882773905865354, -73.9031247504357),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.62809681878341, -73.99574176633654),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.647692997464205, -73.98036384915527),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.830001638976775, -73.90006145374232),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.66152261853153, -73.99220374389996),
-                type: 'info'
-            }, {
-                position: new google.maps.LatLng(40.6516137025306, -73.962815614742825),
-                type: 'parking'
-            }, {
-                position: new google.maps.LatLng(40.84845044662301, -73.93253533994016),
-                type: 'parking'
-            }, {
-                position: new google.maps.LatLng(40.61208720032969, -74.12993146803603),
-                type: 'parking'
-            }, {
-                position: new google.maps.LatLng(40.62437628263973, -74.07750851116587),
-                type: 'parking'
-            }, {
-                position: new google.maps.LatLng(40.801686150810006, -73.94890519312018),
-                type: 'parking'
-            }, {
-                position: new google.maps.LatLng(40.67956301553456, -73.85245111268173),
-                type: 'parking'
-            }, {
-                position: new google.maps.LatLng(40.7417480484786, -73.85648507494219),
-                type: 'parking'
-            }, {
-                position: new google.maps.LatLng(40.75865881403907,-73.98330186067226),
-                type: 'library'
-            }
-        ];
-
-        // Create markers.
-        features.forEach(function(feature) {
-            var marker = new google.maps.Marker({
-                position: feature.position,
-                //icon: icons[feature.type].icon,
-                map: map
-            });
+        var infowindow = new google.maps.InfoWindow({
+            content: "<span>any html goes here</span>"
         });
+
+
+        const data = app.database();
+        const ratRef = data.ref("RAT_TABLE");
+
+        var ratInfo = [];
+        ratRef.limitToLast(40).once('value', function (snapshot) {
+            if (snapshot.exists()) {
+                snapshot.forEach(function (children) {
+                    ratInfo.push({
+                        "key":  children.child("name").val(),
+                        "date": children.child("date").val(),
+                        "type":  children.child("type").val(),
+                        "zip": children.child("zip").val(),
+                        "address": children.child("address").val(),
+                        "city": children.child("city").val(),
+                        "borough": children.child("borough").val(),
+                        "latitude": children.child("latitude").val(),
+                        "longitude": children.child("longitude").val(),
+                        position: new google.maps.LatLng(children.child("latitude").val(), children.child("longitude").val()),
+                    })
+                });
+            }
+        });
+        window.setTimeout(waiter, 5000);
+        function waiter() {
+            ratInfo.forEach(function(feature) {
+                var marker = new google.maps.Marker({
+                    position: feature.position,
+                    title: feature["key"],
+                    //icon: icons[feature.type].icon,
+                    map: map
+                });
+                var infowindow2 = new google.maps.InfoWindow({
+                    content: feature["key"]+ "\n\nEntered on:" + feature["date"] + "\nAddress: "+ feature["address"] +", " + feature["city"] + ", " + feature["zip"] +  "\nType: " + feature["type"]+ "\nBorough: " + feature["borough"]
+                });
+                marker.addListener('click', function() {
+                    infowindow2.open(map,marker);
+                });
+            });
+        }
+
     }
 </script>
-<a href= "../html/main.html" type="button" id="mainReturn" role="button" class="btn btn-success btn-sm">Home</a>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-messaging.js"></script>
+<a href= "../html/main.html" type="button" id="mainReturn" role="button" class="btn btn-success btn-sm">Back to Main</a>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbmdeersid6XSA4kh_TYsGgVSgVF5BrFs&callback=initMap">
 </script>
