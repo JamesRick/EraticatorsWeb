@@ -1,3 +1,7 @@
+var data = d3.map();
+var keys = [];
+var vals = [];
+
 function GraphRats() {
     var startdate = document.getElementById("startdate").value;
     var enddate = document.getElementById("enddate").value;
@@ -17,7 +21,7 @@ function GraphRats() {
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var data = d3.map();
+
 
     dayRef.orderByKey().startAt(startdate).endAt(enddate)
         .once("value", function(snapshot){
@@ -25,69 +29,56 @@ function GraphRats() {
                 console.log(children.numChildren());
                 //console.log("date: %s; num: %d", children.key, children.val().size);
                 data.set(children.key, children.numChildren());
+                keys.push(children.key);
+                vals.push(children.numChildren());
             });
         });
 
-    // d3.tsv("../js/data.tsv", function(d) {
-    //     d.frequency = +d.frequency;
-    //     return d;
-    // }, function(error, data) {
-    //     if (error) throw error;
-    //
-    //     x.domain(data.map(function(d) { return d.letter; }));
-    //     y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
-    //
-    //     g.append("g")
-    //         .attr("class", "axis axis--x")
-    //         .attr("transform", "translate(0," + height + ")")
-    //         .call(d3.axisBottom(x));
-    //
-    //     g.append("g")
-    //         .attr("class", "axis axis--y")
-    //         .call(d3.axisLeft(y).ticks(10, "%"))
-    //         .append("text")
-    //         .attr("transform", "rotate(-90)")
-    //         .attr("y", 6)
-    //         .attr("dy", "0.71em")
-    //         .attr("text-anchor", "end")
-    //         .text("Frequency");
-    //
-    //     g.selectAll(".bar")
-    //         .data(data)
-    //         .enter().append("rect")
-    //         .attr("class", "bar")
-    //         .attr("x", function(d) { return x(d.letter); })
-    //         .attr("y", function(d) { return y(d.frequency); })
-    //         .attr("width", x.bandwidth())
-    //         .attr("height", function(d) { return height - y(d.frequency); });
-    // });
 
-    x.domain(d3.extent(data, function(d) { return d; }));
-    y.domain([0, d3.max(data, function(d) {
-        return data.get(d); })]);
+    window.setTimeout(graphNow, 5000);
 
-    g.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+    function graphNow() {
+        var d3 = Plotly.d3;
 
-    g.append("g")
-        .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y).ticks(10, "%"))
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", "0.71em")
-        .attr("text-anchor", "end")
-        .text("Frequency");
+        var WIDTH_IN_PERCENT_OF_PARENT = 60,
+            HEIGHT_IN_PERCENT_OF_PARENT = 80;
 
-    g.selectAll(".bar")
-        .data(data)
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) { return x(d); })
-        .attr("y", function(d) { return y(data.get(d)); })
-        .attr("width", x.bandwidth())
-        .attr("height", function(d) { return height - y(data.get(d)); });
+        var gd3 = d3.select('body')
+            .append('div')
+            .style({
+                width: WIDTH_IN_PERCENT_OF_PARENT + '%',
+                'margin-left': (100 - WIDTH_IN_PERCENT_OF_PARENT) / 2 + '%',
+
+                height: HEIGHT_IN_PERCENT_OF_PARENT + 'vh',
+                'margin-top': (100 - HEIGHT_IN_PERCENT_OF_PARENT) / 2 + 'vh'
+            });
+
+        var gd = gd3.node();
+
+        console.log(data.keys());
+        console.log(data.values());
+
+        Plotly.plot(gd, [{
+            type: 'bar',
+            x: keys,
+            y: vals,
+            marker: {
+                color: '#C8A2C8',
+                line: {
+                    width: 2.5
+                }
+            }
+        }], {
+            title: 'Auto-Resize',
+            font: {
+                size: 16
+            }
+        });
+
+        window.onresize = function() {
+            Plotly.Plots.resize(gd);
+        };
+
+    }
 
 }
