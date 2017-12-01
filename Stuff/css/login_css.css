@@ -224,3 +224,11 @@ input[type=date]::-webkit-outer-spin-button {
  margin: 0;
 }
 
+#graphing {
+    margin-top:0;
+    position: fixed;
+}
+
+#startdate #enddate #updategraph #home {
+    margin-top: 30px;
+}

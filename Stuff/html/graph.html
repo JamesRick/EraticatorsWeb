@@ -28,12 +28,14 @@
 </style>
 
 <body>
-<svg width="960" height="500"></svg>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="../js/graphRat.js"></script>
-<input id="startdate" type="date" placeholder="Start Date" />
-<input id="enddate" type="date" placeholder="End Date" />
-<input id="updategraph" onclick="GraphRats();" type="button" value="Graph Rats" class="btn btn-success btn-sm" />
-<a href= "../html/main.html" type="button" id="home" role="button" class="btn btn-success btn-sm">Home</a>
+    <div id="graphing">
+        <svg width="960" height="500"></svg>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="../js/graphRat.js"></script>
+        <input id="startdate" type="date" placeholder="Start Date" />
+        <input id="enddate" type="date" placeholder="End Date" />
+        <input id="updategraph" onclick="GraphRats();" type="button" value="Graph Rats" class="btn btn-success btn-sm" />
+        <a href= "../html/main.html" type="button" id="home" role="button" class="btn btn-success btn-sm">Home</a>
+    </div>
 </body>
 </html>
